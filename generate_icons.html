@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>生成Chrome扩展图标</title>
+</head>
+<body>
+    <h1>Temu店铺查询器图标生成</h1>
+    <p>点击下面的按钮生成并下载图标文件：</p>
+    <button onclick="generateIcons()">生成图标</button>
+    
+    <script>
+        function generateIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // 背景渐变
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#ff6b6b');
+            gradient.addColorStop(1, '#ee5a24');
+            ctx.fillStyle = gradient;
+            
+            // 绘制圆角矩形背景
+            ctx.beginPath();
+            const radius = size * 0.15;
+            ctx.roundRect(0, 0, size, size, radius);
+            ctx.fill();
+            
+            // 添加文字 "T"
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.5}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('T', size / 2, size / 2);
+            
+            return canvas;
+        }
+        
+        function downloadCanvas(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        function generateIcons() {
+            const sizes = [16, 48, 128];
+            sizes.forEach(size => {
+                const canvas = generateIcon(size);
+                downloadCanvas(canvas, `icon${size}.png`);
+            });
+            alert('图标已生成！请将下载的文件移动到 icons 目录中。');
+        }
+    </script>
+</body>
+</html>

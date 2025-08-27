@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老郑-跨境电商店铺查询器</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>老郑-跨境电商查询</h1>
+                <button type="button" class="help-btn" id="helpBtn">📋</button>
+            </div>
+            <div class="version-info">v3.2.1 by 老郑</div>
+        </div>
+        
+        <div class="form-section">
+            <div class="input-group">
+                <label for="platform">选择平台:</label>
+                <select id="platform">
+                    <option value="temu">🛍️ Temu</option>
+                    <option value="shein">👗 SHEIN</option>
+                </select>
+            </div>
+            
+            <div class="input-group" id="temuSection">
+                <label for="mallId">店铺ID:</label>
+                <div class="input-with-button">
+                    <input type="text" id="mallId" placeholder="请输入Temu店铺ID" />
+                    <button type="button" class="login-btn" id="temuLoginBtn" title="打开Temu卖家中心">💼 卖家中心</button>
+                </div>
+            </div>
+            
+            <div class="input-group" id="sheinSection" style="display:none;">
+                <label for="storeCode">店铺编码:</label>
+                <div class="input-with-button">
+                    <input type="text" id="storeCode" placeholder="请输入SHEIN店铺编码" />
+                    <button type="button" class="login-btn" id="sheinLoginBtn" title="打开SHEIN卖家中心">💼 卖家中心</button>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="country">选择站点:</label>
+                <div class="country-select-container">
+                    <select id="country">
+                        <!-- 动态加载选项 -->
+                    </select>
+                    <button type="button" class="search-toggle-btn" id="searchToggle">🔍</button>
+                </div>
+                
+                <!-- 搜索弹窗 -->
+                <div class="search-popup" id="searchPopup">
+                    <div class="search-popup-header">
+                        <span>快速搜索站点</span>
+                        <button type="button" class="close-btn" id="closeSearch">×</button>
+                    </div>
+                    <div class="search-popup-body">
+                        <input type="text" id="countrySearch" placeholder="输入国家名称或代码..." />
+                        <div class="search-results" id="searchResults"></div>
+                        <div class="search-info">
+                            <span id="searchCount">显示所有站点</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 使用说明弹窗 -->
+                <div class="help-popup" id="helpPopup">
+                    <div class="help-popup-header">
+                        <span>使用说明</span>
+                        <button type="button" class="close-btn" id="closeHelp">×</button>
+                    </div>
+                    <div class="help-popup-body">
+                        <div class="help-section">
+                            <h4>🛍️ Temu店铺查询</h4>
+                            <p><strong>店铺ID获取方法：</strong></p>
+                            <ol>
+                                <li>点击本插件中的 <strong>"💼 卖家中心"按钮</strong> 或直接访问 Temu卖家中心</li>
+                                <li>登录您的Temu卖家账户</li>
+                                <li>在右上角找到您的店铺信息区域</li>
+                                <li>复制显示的店铺ID（如图中红框所示的数字）</li>
+                                <li>回到本插件，粘贴到"店铺ID"输入框中</li>
+                                <li>选择目标国家站点，点击查询即可</li>
+                            </ol>
+                            <p class="example">**示例：** 
+                            <br>卖家中心显示：<code>ID: <span class="highlight">634418211841547</span></code>
+                            <br>直接复制红框中的数字ID即可</p>
+                        </div>
+                        
+                        <div class="help-section">
+                            <h4>👗 SHEIN店铺查询</h4>
+                            <p><strong>店铺ID获取方法：</strong></p>
+                            <ol>
+                                <li>点击本插件中的 <strong>"💼 卖家中心"按钮</strong> 或直接访问 SHEIN卖家中心</li>
+                                <li>登录您的SHEIN卖家账户</li>
+                                <li>在店铺管理或个人信息页面找到店铺ID</li>
+                                <li>复制显示的店铺ID或店铺编码</li>
+                                <li>回到本插件，粘贴到"店铺编码"输入框中</li>
+                                <li>选择目标国家站点，点击查询即可</li>
+                            </ol>
+                            <p class="example">**示例：** 
+                            <br>卖家中心显示：<code>店铺ID: <span class="highlight">S697312280</span></code>
+                            <br>直接复制店铺ID即可</p>
+                        </div>
+                        
+                        <div class="help-section">
+                            <h4>🔍 快速搜索功能</h4>
+                            <ul>
+                                <li>点击 🔍 按钮打开搜索弹窗</li>
+                                <li>支持中文、英文、国家代码搜索</li>
+                                <li>点击结果即可快速选择国家</li>
+                                <li>选择站点后在对应平台官网查找店铺</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="help-section">
+                            <h4>💡 使用技巧</h4>
+                            <ul>
+                                <li><strong>快捷登录：</strong>点击输入框旁的"💼 卖家中心"按钮快速打开对应平台</li>
+                                <li><strong>操作流程：</strong>点击登录按钮 → 复制店铺ID → 使用插件查询</li>
+                                <li><strong>快捷操作：</strong>Ctrl+C复制，Ctrl+V粘贴（Mac用Cmd键）</li>
+                                <li><strong>历史记录：</strong>查询后自动保存，支持一键重访</li>
+                                <li><strong>多平台：</strong>支持Temu和SHEIN两大跨境电商平台</li>
+                                <li><strong>全球站点：</strong>覆盖全球87个主要市场</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="help-footer">
+                            <p>💡 <strong>操作提示：</strong>卖家后台直接复制店铺ID，快速便捷！</p>
+                            <p>📞 <strong>技术支持：</strong>老郑开发工作室</p>
+                            <p>🎆 <strong>版本：</strong>v3.2.1 - 地址修正版</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="country-info" id="countryInfo">
+                    <span id="countryCount">共0个站点</span>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button id="searchBtn" class="search-btn">查询店铺</button>
+                <button type="button" class="info-btn" id="infoBtn">ℹ️</button>
+            </div>
+        </div>
+        
+        <div class="history-section">
+            <div class="history-header">
+                <h3>访问历史</h3>
+                <button id="clearHistory" class="clear-btn">清空</button>
+            </div>
+            <div id="historyList" class="history-list"></div>
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
