@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "老郑-跨境电商店铺查询器",
-  "version": "3.2.1",
-  "description": "支持Temu和SHEIN的跨境电商店铺查询工具，提供正确的卖家中心登录、详细使用指导和快速搜索功能 - by 老郑",
+  "version": "3.2.2",
+  "description": "支持Temu和SHEIN的跨境电商店铺查询工具，提供正确的卖家中心登录、详细使用指导和快速搜索功能，示例安全可靠 - by 老郑",
   "permissions": ["tabs"],
   "action": {
     "default_popup": "popup.html",
